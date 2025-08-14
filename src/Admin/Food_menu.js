@@ -18,10 +18,10 @@ function Food_menu() {
     setInputs({
             id:'',
             category_id:'',
-            title:'',
+            name:'',
             description:'',
             price:'',
-            duration:''
+            preparation_time:''
         });
         
     setShow(true);
@@ -52,10 +52,10 @@ function Food_menu() {
 
     let datas={
         category_id:e.target.category_id.value,
-        title:e.target.title.value,
+        name:e.target.name.value,
         description:e.target.description.value,
         price:e.target.price.value,
-        duration:e.target.duration.value
+        preparation_time:e.target.preparation_time.value
     }
     datas ={...inputs, ...datas} // marge two object
    
@@ -119,7 +119,7 @@ function Food_menu() {
             <th>Title</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Duration</th>
+            <th>Preparation Time</th>
             <th>Image</th>
             <th>Action</th>
           </tr>
@@ -147,7 +147,7 @@ function Food_menu() {
       <Modal show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>Add New</Modal.Title>
+            <Modal.Title>Add New</Modal.name>
           </Modal.Header>
           <Modal.Body>
               <div className='form-group'>
@@ -162,8 +162,8 @@ function Food_menu() {
                   )}
               </div>
               <div className='form-group'>
-                  <label htmlFor='title'>Title</label>
-                  <input type='text' defaultValue={inputs.title} className='form-control' name="title" id='title'/>
+                  <label htmlFor='name'>Title</label>
+                  <input type='text' defaultValue={inputs.name} className='form-control' name="title" id='name'/>
               </div>
               <div className='form-group'>
                   <label htmlFor='description'>Description</label>
@@ -174,8 +174,8 @@ function Food_menu() {
                   <input type='text' defaultValue={inputs.price} className='form-control' name="price" id='price'/>
               </div>
               <div className='form-group'>
-                  <label htmlFor='duration'>Duration</label>
-                  <input type='text' defaultValue={inputs.duration} className='form-control' name="duration" id='duration'/>
+                  <label htmlFor='preparation_time'>Preparation Time</label>
+                  <input type='text' defaultValue={inputs.preparation_time} className='form-control' name="preparation_time" id='preparation_time'/>
               </div>
               <div className='form-group'>
                   <label htmlFor='image'>Photo</label>
