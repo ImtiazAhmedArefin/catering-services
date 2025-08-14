@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from '../Admin/component/axios';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TestimonialSection from "../components/Testimonial";
@@ -25,71 +26,21 @@ function Home() {
   
   // Fetch menu items and categories - using the same data as Menu.js
   useEffect(() => {
-    // Using the same mock data as in Menu.js
-    const mockCategories = [
-      { id: 1, name: 'Appetizer' },
-      { id: 2, name: 'Soup' },
-      { id: 3, name: 'Salad' },
-      { id: 4, name: 'Main Course' },
-      { id: 5, name: 'Dessert' }
-    ];
-    
-    const mockMenuItems = [
-      // Appetizer items
-      { id: 1, name: 'Devils on Horseback', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/menu-01.jpg', category_id: 1 },
-      { id: 2, name: 'Salami', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/menu-02.jpg', category_id: 1 },
-      { id: 3, name: 'Bourbon-Glazed Salmon', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/menu-03.jpg', category_id: 1 },
-      { id: 4, name: 'Teriyaki Meatballs', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/menu-04.jpg', category_id: 1 },
-      { id: 5, name: 'Asparagus', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/menu-05.jpg', category_id: 1 },
-      { id: 6, name: 'Sweet Potato Bites', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/menu-06.jpg', category_id: 1 },
-      { id: 7, name: 'Pear Prosciutto - Copy', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/menu-07.jpg', category_id: 1 },
-      { id: 8, name: 'Herb & Walnut Mini Cheese Balls', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/menu-08.jpg', category_id: 1 },
-      
-      // Soup items
-      { id: 9, name: 'Vegetable Beef Soup', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/soup-1.png', category_id: 2 },
-      { id: 10, name: 'CriWinter-Vegetable Soup', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/soup-2.png', category_id: 2 },
-      { id: 11, name: 'Vegetable soup', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/soup-3.png', category_id: 2 },
-      { id: 12, name: 'Vegetable Soup without Tomatoes', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/soup-4.png', category_id: 2 },
-      { id: 13, name: 'Thick and Creamy Tomato Soup', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/soup-5.png', category_id: 2 },
-      { id: 14, name: 'Vegan Tomato Soup', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/soup-6.png', category_id: 2 },
-      { id: 15, name: 'Beef Broth Vegetable Soup', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/soup-7.png', category_id: 2 },
-      { id: 16, name: 'Chicken Soup', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/soup-8.png', category_id: 2 },
-      
-      // Salad items
-      { id: 17, name: 'Vegetable Salad', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/salad-1.png', category_id: 3 },
-      { id: 18, name: 'Thai Cucumber Salad', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/salad-2.png', category_id: 3 },
-      { id: 19, name: 'Grilled Chicken Salad', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/salad-3.png', category_id: 3 },
-      { id: 20, name: 'Garden Salad', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/salad-4.png', category_id: 3 },
-      { id: 21, name: 'Cobb Salad', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/salad-5.png', category_id: 3 },
-      { id: 22, name: 'Chicken Salad', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/salad-6.png', category_id: 3 },
-      { id: 23, name: 'Avocado Salad', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/salad-7.png', category_id: 3 },
-      { id: 24, name: 'Greek Salad', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/salad-8.png', category_id: 3 },
-      
-      // Main Course items
-      { id: 25, name: 'Chicken Dijon', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/main-3 Chicken Dijon.png', category_id: 4 },
-      { id: 26, name: 'Thai-Style Fried Chicken Wings', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/main-3 Seared Chicken Thighs with Blistered Tomatoes & Basil.png', category_id: 4 },
-      { id: 27, name: 'Seared Chicken Thighs with Blistered Tomatoes & Basil', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/main-2 Seared Chicken Thighs with Blistered Tomatoes & Basil.png', category_id: 4 },
-      { id: 28, name: 'Prunes Stuffed Chicken Roulade with Vegetables', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/main-1 Prunes Stuffed Chicken Roulade with Vegetables.png', category_id: 4 },
-      { id: 29, name: 'Pan Roast Chicken', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/main-4 Pan Roast Chicken.png', category_id: 4 },
-      { id: 30, name: 'Chicken Veggie Roll with Honey Sauce', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/main-6 Chicken Veggie Roll with Honey Sauce.png', category_id: 4 },
-      { id: 31, name: 'Chicken Stew', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/main-7 Chicken Stew.png', category_id: 4 },
-      { id: 32, name: 'Chicken Roulade', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/main-8 Chicken Roulade.png', category_id: 4 },
-      
-      // Dessert items
-      { id: 33, name: 'Banana Bites', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/dessert-1 banana-bites.jpg', category_id: 5 },
-      { id: 34, name: 'Birthday Cake Whoopie Pies', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/dessert-2 Birthday-Cake-Whoopie-Pies-02.jpg', category_id: 5 },
-      { id: 35, name: 'Candy Number Cupcake Topper', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/dessert-3 candy-number-cupcake-topper.jpg', category_id: 5 },
-      { id: 36, name: 'Chocolate Chip Cookie Bowls', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/dessert-4 Chocolate-Chip-Cookie-Bowls.jpg', category_id: 5 },
-      { id: 37, name: 'Fudgy Brownies', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/dessert-5 fudgy-brownies.jpg', category_id: 5 },
-      { id: 38, name: 'Jumbo Ice-cream Sandwhich Cookies', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/dessert-6 jumbo-ice-cream-sandwhich-cookies.jpg', category_id: 5 },
-      { id: 39, name: 'Lemon Bars', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/dessert-7 lemon-bars.jpg', category_id: 5 },
-      { id: 40, name: 'Pina Colada Cupcakes', description: 'Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.', price: 90.00, image_url: 'assets/img/dessert-8 pina-colada-cupcakes.jpg', category_id: 5 }
-    ];
-    
-    setCategories(mockCategories);
-    setMenuItems(mockMenuItems);
+    getDatas();
+    getCategories();
   }, []);
   
+  const getDatas = async (e) => {
+    let res = await axios.get(`front_api/food_menu.php`)
+    setMenuItems(res.data);
+  }
+  
+  const getCategories = async (e) => {
+    let res = await axios.get(`front_api/categories.php`)
+    setCategories(res.data);
+    console.log(res.data)
+  }
+
   // Add item to cart
   const addToCart = (item) => {
     setCartItems([...cartItems, item]);
@@ -108,10 +59,10 @@ function Home() {
   };
   
   // Filter menu items by active category
-  const filteredItems = menuItems.filter(item => {
-    const category = categories.find(cat => cat.id === item.category_id);
-    return category && category.name === activeCategory;
-  });
+  // const filteredItems = menuItems && menuItems.filter(item => {
+  //   const category = categories.find(cat => cat.id === item.category_id);
+  //   return category && category.name === activeCategory;
+  // });
   
   return (
     <Weblayout>
@@ -496,11 +447,15 @@ function Home() {
       
       {/* Menu Section with Add to Cart - Using Menu Component */}
       <div className="container-fluid menu bg-light py-6 my-6">
-        <Menu 
+        {categories.length > 0 && menuItems.length > 0 && (
+            <Menu 
           categories={categories}
           menuItems={menuItems}
           showHeader={true}
         />
+        )
+        }
+        
       </div>
       
       <BookingSection />

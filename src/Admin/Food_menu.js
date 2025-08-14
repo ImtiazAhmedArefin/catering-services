@@ -21,7 +21,11 @@ function Food_menu() {
             name:'',
             description:'',
             price:'',
-            preparation_time:''
+            preparation_time:'',
+            is_vegetarian:'',
+            is_vegan:'',
+            is_gluten_free:'',
+            is_featured:'',
         });
         
     setShow(true);
@@ -55,7 +59,12 @@ function Food_menu() {
         name:e.target.name.value,
         description:e.target.description.value,
         price:e.target.price.value,
-        preparation_time:e.target.preparation_time.value
+        preparation_time:e.target.preparation_time.value,
+
+        is_vegetarian:e.target.is_vegetarian.value,
+        is_vegan:e.target.is_vegan.value,
+        is_gluten_free:e.target.is_gluten_free.value,
+        is_featured:e.target.is_featured.value,
     }
     datas ={...inputs, ...datas} // marge two object
    
@@ -72,9 +81,9 @@ function Food_menu() {
     try{
       let url='';
       if(datas.id!=''){
-        url=`courses/update.php`;
+        url=`food-menu/update.php`;
       }else{
-        url=`courses/add.php`;
+        url=`food-menu/add.php`;
       }
      
       let response= await axios.post(url,formData);
@@ -147,7 +156,7 @@ function Food_menu() {
       <Modal show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>Add New</Modal.name>
+            <Modal.Title>Add New</Modal.Title>
           </Modal.Header>
           <Modal.Body>
               <div className='form-group'>
@@ -162,7 +171,7 @@ function Food_menu() {
                   )}
               </div>
               <div className='form-group'>
-                  <label htmlFor='name'>Title</label>
+                  <label htmlFor='name'>Manu Name</label>
                   <input type='text' defaultValue={inputs.name} className='form-control' name="title" id='name'/>
               </div>
               <div className='form-group'>
@@ -180,6 +189,38 @@ function Food_menu() {
               <div className='form-group'>
                   <label htmlFor='image'>Photo</label>
                   <input type='file' onChange={handelFile} className='form-control' name='image' id='image'/>
+              </div>
+              <div className='form-group'>
+                <label htmlFor='is_vegetarian'>Vegetarian </label>
+                <select defaultValue={inputs.is_vegetarian} className='form-control' name="is_vegetarian" id='is_vegetarian'>
+                  <option value="">Select Vegetarian</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+              <div className='form-group'>
+                <label htmlFor='is_vegan'>Vegan </label>
+                <select defaultValue={inputs.is_vegan} className='form-control' name="is_vegan" id='is_vegan'>
+                  <option value="">Select Vegan</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+              <div className='form-group'>
+                <label htmlFor='is_gluten_free'>Glutin Free </label>
+                <select defaultValue={inputs.is_gluten_free} className='form-control' name="is_gluten_free" id='is_gluten_free'>
+                  <option value="">Select Glutin Free</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+              <div className='form-group'>
+                <label htmlFor='is_featured'>Featured </label>
+                <select defaultValue={inputs.is_featured} className='form-control' name="is_featured" id='is_featured'>
+                  <option value="">Select Featured</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
               </div>
 
           </Modal.Body>

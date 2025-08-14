@@ -104,9 +104,9 @@ function Menu({ categories: propCategories, menuItems: propMenuItems, showHeader
       
       // Initialize quantities for provided menu items
       const initialQuantities = {};
-      propMenuItems.forEach(item => {
-        initialQuantities[item.id] = 1;
-      });
+      // propMenuItems.forEach(item => {
+      //   initialQuantities[item.id] = 1;
+      // });
       setQuantities(initialQuantities);
     }
     
@@ -177,10 +177,10 @@ function Menu({ categories: propCategories, menuItems: propMenuItems, showHeader
   };
   
   // Filter menu items by active category
-  const filteredItems = menuItems.filter(item => {
-    const category = categories.find(cat => cat.id === item.category_id);
-    return category && category.name === activeCategory;
-  });
+  // const filteredItems = menuItems.filter(item => {
+  //   const category = categories.find(cat => cat.id === item.category_id);
+  //   return category && category.name === activeCategory;
+  // });
   
   if (loading) {
     return (
@@ -219,7 +219,7 @@ function Menu({ categories: propCategories, menuItems: propMenuItems, showHeader
           <div className="tab-content">
             <div className="tab-pane fade show p-0 active">
               <div className="row g-4">
-                {filteredItems.map(item => (
+                {menuItems.map(item => (
                   <div className="col-lg-6 wow bounceInUp" data-wow-delay="0.1s" key={item.id}>
                     <div className="menu-item d-flex align-items-center">
                       <img className="flex-shrink-0 img-fluid rounded-circle" src={item.image_url} alt={item.name} style={{width: '80px', height: '80px'}}/>
