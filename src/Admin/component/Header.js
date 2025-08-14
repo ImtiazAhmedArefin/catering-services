@@ -21,7 +21,7 @@ function Header(){
                     <Link className="nav-link" to={"/admin/user"}>User</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to={"/admin/categories"}>Food Menu</Link>
+                    <Link className="nav-link" to={"/admin/food_menu"}>Food Menu</Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" to={"/admin/courses"}>Booking</Link>

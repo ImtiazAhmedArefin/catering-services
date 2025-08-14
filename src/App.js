@@ -14,6 +14,7 @@ import Blog from './pages/Blog';
 import Testimonial from './pages/Testimonial';
 import NotFound from './pages/NotFound';
 import Contact from './pages/Contact';
+import Menu from './pages/Menu';
 import Header from './components/Header'; // Add this import
 import './assets/importfile.css';
 import './assets/css/bootstrap.min.css';
@@ -34,7 +35,7 @@ import Dashboard from './Admin/Dashboard';
 import Users from './Admin/Users';
 //import Useradd from './Admin/Useradd';
 import Protected from './Admin/protected';
-import Menu from './pages/Menu';
+import Food_menu from './Admin/Food_menu';
 import Cart from './pages/Cart';
 import { CartProvider } from 'react-use-cart';
 
@@ -76,6 +77,11 @@ function App() {
         <Route path="/admin/user" element={
           <Protected isSignedIn={isSignedIn}>
             <Users />
+          </Protected>
+        } />
+        <Route path="/admin/food_menu" element={
+          <Protected isSignedIn={isSignedIn}>
+            <Food_menu />
           </Protected>
         } />
 

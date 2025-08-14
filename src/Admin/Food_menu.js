@@ -4,7 +4,7 @@ import Adminlayout from '../layout/Adminlayout';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function Courses() {
+function Food_menu() {
   const [list,setList]=useState([]);// this page main data
   const [cat,setCat]=useState([]);// relational category data. It's used in select box of category
   const [show, setShow] = useState(false);
@@ -33,7 +33,7 @@ function Courses() {
   }, []);
 
   const getDatas = async (e) => {
-    let res = await axios.get(`courses/list.php`)
+    let res = await axios.get(`food-menu/list.php`)
     setList(res.data);
   }
 
@@ -129,10 +129,10 @@ function Courses() {
             <tr key={key}>
               <td className="text-bold-500">{key+1}</td>
               <td>{d.cat_name}</td>
-              <td>{d.title}</td>
+              <td>{d.name}</td>
               <td>{d.description}</td>
               <td>{d.price}</td>
-              <td>{d.duration}</td>
+              <td>{d.preparation_time}</td>
               <td><img src={`${process.env.REACT_APP_API_URL}${d.image}`} width="100px"/></td>
               <td>
                   <Button variant="primary" onClick={()=>{showEdit(d)}}>Edit</Button>
@@ -198,4 +198,4 @@ function Courses() {
 }
 
 
-export default Courses;
+export default Food_menu;

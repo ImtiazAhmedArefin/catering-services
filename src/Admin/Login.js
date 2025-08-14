@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from './component/axios';
 import { useNavigate } from 'react-router-dom';
 function Login() {
   const navigate=useNavigate();
@@ -10,15 +10,14 @@ function Login() {
       email:e.target.email.value,
       password:e.target.password.value
     };
+    const formData = new FormData();
+    for (const property in datas) {
+      formData.append(property, datas[property])
+    }
     try{
-      let url='http://localhost/learner-api/login.php';
+      let url='login.php';
       
-      let response= await axios({
-          method: 'post',
-          responsiveTYpe: 'json',
-          url: url,
-          data: datas
-      });
+      let response= await axios.post(url,formData );
 
       if(response.data.jwt){
           /* if you want, user will be logged in until they logout*/
