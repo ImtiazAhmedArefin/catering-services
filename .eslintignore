@@ -1,0 +1,3 @@
+# don’t lint any of my vendor scripts
+src/assets/js/**
+src/assets/lib/**
